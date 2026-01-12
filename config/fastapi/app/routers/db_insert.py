@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from pydantic import BaseModel
 from sqlalchemy import create_engine, text
 
 from app.settings import db_name, db_user, db_password
@@ -12,15 +13,21 @@ def connect_to_db(db_name: str, db_user: str, db_password: str):
     )
 
 
-@router_insert.get("/insert_user")
-async def insert_user():
+class UserData(BaseModel):
+    name: str
+    posts: int
+    location: str
+
+
+@router_insert.post("/insert_user")
+async def insert_user(user: UserData):
     try:
         db_connection = connect_to_db(db_name=db_name, db_user=db_user, db_password=db_password)
 
         params = {
-            "name": "Asia",
-            "posts": 4,
-            "location": "Warszawa"
+            "name": user.name,
+            "posts": user.posts,
+            "location": user.location
         }
 
         sql_query = text("""
@@ -38,4 +45,4 @@ async def insert_user():
         print(e)
         raise e
 
-    return {"statu": 1}
+    return {"status": 1}
