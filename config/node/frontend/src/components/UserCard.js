@@ -19,12 +19,12 @@ function UserCard({user}) {
                         </Avatar>
                     }
                     title={user.name}
-                    subheader={user.address.city}
+                    subheader={user.location}
                 />
 
                 <CardContent>
                     <Typography variant="body2" sx={{color: 'text.secondary'}}>
-                        Twój znajomy {user.name} opublikował {user.id} postów.
+                        Twój znajomy {user.name} opublikował {user.posts} postów.
                     </Typography>
                 </CardContent>
 
