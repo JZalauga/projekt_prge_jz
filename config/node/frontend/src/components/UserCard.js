@@ -19,7 +19,7 @@ function UserCard({user}) {
                         </Avatar>
                     }
                     title={user.name}
-                    subheader={user.location}
+                    subheader={user.address.city}
                 />
 
                 <CardContent>
