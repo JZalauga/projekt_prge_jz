@@ -14,6 +14,27 @@ function Services(props) {
         >
             PRZEJDŹ DO MAPY
         </Button>
+
+
+        <Button
+            className='services__button'
+            variant='contained'
+            size='large'
+            component={Link}
+            to='/list'
+        >
+            PRZEJDŹ listy użytkowników
+        </Button>
+
+        <Button
+            className='services__button'
+            variant='contained'
+            size='large'
+            component={Link}
+            to='/newuser'
+        >
+            Dodaj nowego użytkownika
+        </Button>
     </div>
 
 }
