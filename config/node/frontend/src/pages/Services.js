@@ -4,15 +4,26 @@ import {Link} from "react-router-dom";
 
 function Services(props) {
     return <div>
-        <div>Services</div>
+        <div>Wybierz usługę</div>
+
         <Button
-            className='services__button'
+            className='geoportal__button'
             variant='contained'
-            size='large'
+            size= "large"
             component={Link}
             to='/map'
         >
-            PRZEJDŹ DO MAPY
+            geoportal
+        </Button>
+
+        <Button
+            className='services__button'
+            variant='contained'
+            size='large'
+            component={Link}
+            to='/cemeteries'
+        >
+            Cmentarze
         </Button>
 
 
@@ -21,9 +32,9 @@ function Services(props) {
             variant='contained'
             size='large'
             component={Link}
-            to='/list'
+            to='/workers'
         >
-            PRZEJDŹ listy użytkowników
+            Pracownicy
         </Button>
 
         <Button
@@ -31,9 +42,9 @@ function Services(props) {
             variant='contained'
             size='large'
             component={Link}
-            to='/newuser'
+            to='/clients'
         >
-            Dodaj nowego użytkownika
+            Klienci
         </Button>
     </div>
 
