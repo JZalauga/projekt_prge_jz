@@ -8,7 +8,7 @@ function Home(props) {
             <h1 className='home__title'>GEOPORTAL</h1>
 
             <Typography className='home__subtile'>
-                Geoportal tematyczny poświęcony danym przestrzennym.
+                Geoportal cmentarzy
             </Typography>
 
             <Button
