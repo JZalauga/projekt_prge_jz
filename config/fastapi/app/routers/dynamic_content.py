@@ -7,7 +7,7 @@ router_get_users = APIRouter()
 
 def connect_to_db(db_name: str, db_user: str, db_password: str):
     return create_engine(
-        f"postgresql://{db_user}:{db_password}@postgis:5432/{db_name}"
+        f"postgresql://{db_user}:{db_password}@postgis:5445/{db_name}"
     )
 
 
