@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.routers.static_content import router
-from app.routers.db_insert import router_insert_cemetery, router_insert_worker
+from app.routers.db_insert import router_insert_cemetery, router_insert_worker, router_insert_client
 from app.routers.dynamic_content import router_get_cemetery, router_get_worker
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,3 +23,7 @@ app.include_router(router_get_cemetery, prefix="/app")
 
 app.include_router(router_insert_worker, prefix="/app")
 app.include_router(router_get_worker, prefix="/app")
+
+app.include_router(router_insert_client, prefix="/app")
+
+

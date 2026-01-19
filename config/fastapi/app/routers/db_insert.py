@@ -6,6 +6,8 @@ from app.settings import db_name, db_user, db_password
 
 router_insert_cemetery = APIRouter()
 router_insert_worker = APIRouter()
+router_insert_client = APIRouter()
+
 
 
 def connect_to_db(db_name: str, db_user: str, db_password: str):
@@ -100,5 +102,34 @@ async def insert_user(worker: WorkerData):
 
     return {"status": 1}
 
-          
-     
+
+class ClientData(BaseModel):
+    name: str
+    type: str
+    location: str     
+
+@router_insert_client.post("/insert_client")
+async def insert_user(client: ClientData):
+    try:
+        db_connection = connect_to_db(db_name=db_name, db_user=db_user, db_password=db_password)
+        coords = get_coord_osm(client.location)
+        params = {
+            "name": client.name,
+            "type": client.type,
+            "location": client.location,
+            "latitude": coords[0],
+            "longitude": coords[1]
+        }
+
+        sql = text(""" insert into clients (name, type, location, latitude, longitude) 
+                     values (:name, :type, :location, :latitude, :longitude);""")
+        
+        with db_connection.connect() as conn:
+            result = conn.execute(sql, params)
+            conn.commit()
+    except Exception as e:
+        print(e)
+        raise e
+
+    return {"status": 1}
+
