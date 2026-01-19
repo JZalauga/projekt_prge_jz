@@ -2,22 +2,22 @@ from fastapi import APIRouter
 from sqlalchemy import create_engine, text
 from app.settings import db_name, db_user, db_password
 
-router_get_users = APIRouter()
+router_get_cemetery = APIRouter()
 
 
 def connect_to_db(db_name: str, db_user: str, db_password: str):
     return create_engine(
-        f"postgresql://{db_user}:{db_password}@postgis:5445/{db_name}"
+        f"postgresql://{db_user}:{db_password}@postgis:5432/{db_name}"
     )
 
 
-@router_get_users.get("/get_users")
+@router_get_cemetery.get("/get_cemetery")
 async def get_users():
     try:
         db_connection = connect_to_db(db_name=db_name, db_user=db_user, db_password=db_password)
 
         sql_query = text("""select *
-                            from users""")
+                            from cemeteries;""")
 
         with db_connection.connect() as conn:
             result = conn.execute(sql_query)
