@@ -6,6 +6,9 @@ router_get_cemetery = APIRouter()
 
 router_get_worker = APIRouter()
 
+router_get_client = APIRouter()
+
+
 
 
 def connect_to_db(db_name: str, db_user: str, db_password: str):
@@ -24,9 +27,9 @@ async def get_users():
 
         with db_connection.connect() as conn:
             result = conn.execute(sql_query)
-            users = [dict(row._mapping) for row in result]
+            cemeteries = [dict(row._mapping) for row in result]
 
-        return {"status": "success", "data": users}
+        return {"status": "success", "data": cemeteries}
 
     except Exception as e:
         print(f' bląd podczas get_users')
@@ -43,10 +46,28 @@ async def get_worker():
         
         with db_connection.connect() as conn:
             result = conn.execute(sql)
-            users = [dict(row._mapping) for row in result]
+            workers = [dict(row._mapping) for row in result]
 
-        return {"status": "success", "data": users}
+        return {"status": "success", "data": workers}
 
     except Exception as e:
         print(f' bląd podczas get_worker')
+        return {"status": 'error'}
+    
+
+@router_get_client.get("/get_client")
+async def get_client():
+    try:
+        db_connection = connect_to_db(db_name=db_name, db_user=db_user, db_password=db_password)
+
+        sql = text("""select *
+                    from clients;""")
+        with db_connection.connect() as conn:
+            result = conn.execute(sql)
+            clients = [dict(row._mapping) for row in result]
+            
+        return {"status": "success", "data": clients}
+
+    except Exception as e:
+        print(f' bląd podczas get_client')
         return {"status": 'error'}
